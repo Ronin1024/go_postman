@@ -23,7 +23,9 @@ func Fetch(url string, postBody map[string]string, options FetchOptions) (respon
 	requestBodyBytes, _ := json.Marshal(postBody)
 	requestBody := bytes.NewBuffer(requestBodyBytes)
 	req, err := http.NewRequestWithContext(ctx, strings.ToUpper(options.Method), url, requestBody)
-
+	if strings.ToUpper(options.Method) == "GET" {
+		req, err = http.NewRequestWithContext(ctx, strings.ToUpper(options.Method), url, nil)
+	}
 	if err != nil {
 		err = fmt.Errorf("could not create request: %s\n", err)
 		return
