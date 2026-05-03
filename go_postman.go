@@ -16,7 +16,7 @@ type FetchOptions struct {
 	Headers map[string]string
 }
 
-func Fetch(url string, postBody map[string]string, options FetchOptions) (response *http.Response, err error) {
+func Fetch(url string, postBody map[string]interface{}, options FetchOptions) (response *http.Response, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
 
